@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>浓得化不开</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://zhangweixi.github.io/"/>
+  <updated>2021-04-19T07:47:00.724Z</updated>
+  <id>http://zhangweixi.github.io/</id>
+  
+  <author>
+    <name>樵夫</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【顶置】日常事务安排</title>
+    <link href="http://zhangweixi.github.io/2050/01/01/2050-01-01Day-Plan/"/>
+    <id>http://zhangweixi.github.io/2050/01/01/2050-01-01Day-Plan/</id>
+    <published>2050-01-01T00:00:00.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th>日期</th><th>计划</th><th>结果</th><th>备注</th></tr></thead><tbody><tr><td>2019-03-13</td><td>对electron-Angular的整合熟悉其工作原理</td><td></td><td></td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      常用工具查询
+    
+    </summary>
+    
+    
+      <category term="规划" scheme="http://zhangweixi.github.io/categories/%E8%A7%84%E5%88%92/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>element-admin 使用笔记</title>
+    <link href="http://zhangweixi.github.io/2021/04/19/element-admin-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zhangweixi.github.io/2021/04/19/element-admin-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-04-19T15:26:26.000Z</published>
+    <updated>2021-04-19T07:47:00.728Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、API接口统一格式"><a href="#一、API接口统一格式" class="headerlink" title="一、API接口统一格式"></a>一、API接口统一格式</h2><p>后台提供的API接口返回格式应该满足如下格式才可</p><pre><code class="javascript">{   code: 20000, // 50008 50012 50014 都会造成重新登录   message: &#39;提示消息&#39;,   data: {}}</code></pre><a id="more"></a><p>在授权后的请求中，将把token放在header的X-token中</p><pre><code>header.X-Token = &#39;your token&#39;</code></pre><h2 id="二、登录接口"><a href="#二、登录接口" class="headerlink" title="二、登录接口"></a>二、登录接口</h2><p>请求</p><pre><code class="javascript">{    username: &#39;account&#39;,    password: &#39;password&#39;,}</code></pre><p>返回</p><pre><code class="javascript">{    code: 20000,    message: &#39;success&#39;,    data: {        token: &#39;your token&#39;    }}</code></pre><h2 id="三、用户信息接口"><a href="#三、用户信息接口" class="headerlink" title="三、用户信息接口"></a>三、用户信息接口</h2><pre><code class="javascript">{    code: 20000,    message: &#39;success&#39;,    data: {        name: &#39;name&#39;,        avatar: &#39;头像&#39;    }}</code></pre><h2 id="四、代理请求的时候一直pending"><a href="#四、代理请求的时候一直pending" class="headerlink" title="四、代理请求的时候一直pending"></a>四、代理请求的时候一直pending</h2><p><a href="https://blog.csdn.net/yuse6262/article/details/107393394" target="_blank">详细文档”https://blog.csdn.net/yuse6262/article/details/107393394”</a></p><p><strong>超时时候</strong></p><pre><code class="javascript">proxy: {    &quot;/api&quot;: {        target: &#39;http://127.0.0.1:8000&#39;,        changeOrigin: true,    }}</code></pre><p><strong>解决超时</strong></p><pre><code class="javascript">proxy: {    &quot;/api&quot;: {        target: &#39;http://127.0.0.1:8000&#39;,        changeOrigin: true,        // 由于vue中使用了body-parser 导致http中的body被序列化两次，从而使得配置代理后后端无法获取body中的数据        onProxyReq: function(proxyReq, req, res, options) {            if (req.body) {                const reg = new RegExp(&#39;application/json&#39;)                 if (reg.test(proxyReq.getHeader(&#39;Content-Type&#39;))) {                    const bodyData = JSON.stringify(req.body)                     proxyReq.setHeader(&#39;Content-Length&#39;, Buffer.byteLength(bodyData))                    // stream the content                    proxyReq.write(bodyData)                }            }        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      使用element-admin的项目经验
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://zhangweixi.github.io/categories/JS/"/>
+    
+    
+      <category term="JS" scheme="http://zhangweixi.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux便签</title>
+    <link href="http://zhangweixi.github.io/2020/05/29/Linux%E6%A0%87%E7%AD%BE/"/>
+    <id>http://zhangweixi.github.io/2020/05/29/Linux%E6%A0%87%E7%AD%BE/</id>
+    <published>2020-05-29T16:29:44.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="使用PHP调用shell输出到指定文件"><a href="#使用PHP调用shell输出到指定文件" class="headerlink" title="使用PHP调用shell输出到指定文件"></a>使用PHP调用shell输出到指定文件</h4><pre><code class="php">&lt;?php$cmd = &quot;ls / &gt; outfile 2&gt;&amp;1&quot;;exec($cmd);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;使用PHP调用shell输出到指定文件&quot;&gt;&lt;a href=&quot;#使用PHP调用shell输出到指定文件&quot; class=&quot;headerlink&quot; title=&quot;使用PHP调用shell输出到指定文件&quot;&gt;&lt;/a&gt;使用PHP调用shell输出到指定文件&lt;/h4&gt;&lt;pre&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://zhangweixi.github.io/categories/Linux/"/>
+    
+    
+      <category term="linux" scheme="http://zhangweixi.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EGG实践笔记</title>
+    <link href="http://zhangweixi.github.io/2020/05/18/EGG%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zhangweixi.github.io/2020/05/18/EGG%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-05-18T14:47:08.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>进制数据库字段将驼峰自动转换为下划线,设置：underscored:false</li><li>数据库进制自动转换为复数：freezeTableName： true</li><li>自定义数据库名称：tableName: xxx</li><li>调用service的方式为ctx.service.xxxx.method(),这里的xxxx是某个服务的文件名字，而不是服务的类名</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;进制数据库字段将驼峰自动转换为下划线,设置：underscored:false&lt;/li&gt;
+&lt;li&gt;数据库进制自动转换为复数：freezeTableName： true&lt;/li&gt;
+&lt;li&gt;自定义数据库名称：tableName: xxx&lt;/li&gt;
+&lt;li&gt;调用ser
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL超过最大连接数量</title>
+    <link href="http://zhangweixi.github.io/2020/05/12/MySQL%E8%B6%85%E8%BF%87%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0%E9%87%8F/"/>
+    <id>http://zhangweixi.github.io/2020/05/12/MySQL%E8%B6%85%E8%BF%87%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0%E9%87%8F/</id>
+    <published>2020-05-12T16:08:41.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><pre><code class="sql">SQLSTATE[HY000] [1129] Host &#39;172.20.0.1&#39; is blocked because of many connection errors; unblock with &#39;mysqladmin flush-hosts&#39; (SQL: select * from `user` where `openid` = oQxMh5b_yYB6YjK74C5l73T5vGZ0 limit 1)</code></pre><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>docker mysql8<br>几乎处于无人使用的状态</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><pre><code class="sql">flush hosts;</code></pre><h3 id="为什么会发生这样的问题呢？"><a href="#为什么会发生这样的问题呢？" class="headerlink" title="为什么会发生这样的问题呢？"></a>为什么会发生这样的问题呢？</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;报错&quot;&gt;&lt;a href=&quot;#报错&quot; class=&quot;headerlink&quot; title=&quot;报错&quot;&gt;&lt;/a&gt;报错&lt;/h3&gt;&lt;pre&gt;&lt;code class=&quot;sql&quot;&gt;SQLSTATE[HY000] [1129] Host &amp;#39;172.20.0.1&amp;#39; i
+      
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="http://zhangweixi.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="http://zhangweixi.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中断函数的坑</title>
+    <link href="http://zhangweixi.github.io/2020/05/09/%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E7%9A%84%E5%9D%91/"/>
+    <id>http://zhangweixi.github.io/2020/05/09/%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E7%9A%84%E5%9D%91/</id>
+    <published>2020-05-09T17:18:49.000Z</published>
+    <updated>2021-04-19T07:47:00.728Z</updated>
+    
+    <content type="html"><![CDATA[<p>在嵌入式项目中，中断函数可以任意写，但是中断号却是唯一的，如果写了两个中断，将会导致后面的一个函数覆盖掉原来的中断，所以，在嵌入式项目中，最好把那些与项目无关的列子去掉</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在嵌入式项目中，中断函数可以任意写，但是中断号却是唯一的，如果写了两个中断，将会导致后面的一个函数覆盖掉原来的中断，所以，在嵌入式项目中，最好把那些与项目无关的列子去掉&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="嵌入式" scheme="http://zhangweixi.github.io/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>项目之问</title>
+    <link href="http://zhangweixi.github.io/2020/04/28/%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%97%AE/"/>
+    <id>http://zhangweixi.github.io/2020/04/28/%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%97%AE/</id>
+    <published>2020-04-28T11:41:04.000Z</published>
+    <updated>2021-04-19T07:47:00.728Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>如果你的服务停止了，你知道吗？</li><li>你的服务器的CPU,内存，带宽是否满足服务需求，或者是否存在浪费资源的现象呢？</li><li>服务器上是否存在过多重复的静态资源？</li><li>服务器是否存在垃圾文件，即以后永远都不会再用到的文件</li><li>项目中使用各种语言相同工作方式的加密方式，以便同一个项目使用不同的语言的时候造成数据间无法共享</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;如果你的服务停止了，你知道吗？&lt;/li&gt;
+&lt;li&gt;你的服务器的CPU,内存，带宽是否满足服务需求，或者是否存在浪费资源的现象呢？&lt;/li&gt;
+&lt;li&gt;服务器上是否存在过多重复的静态资源？&lt;/li&gt;
+&lt;li&gt;服务器是否存在垃圾文件，即以后永远都不会再用到的文件&lt;/l
+      
+    
+    </summary>
+    
+    
+      <category term="项目管理" scheme="http://zhangweixi.github.io/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+    
+    
+      <category term="项目管理" scheme="http://zhangweixi.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS async 与 wait 实验笔记</title>
+    <link href="http://zhangweixi.github.io/2020/04/27/JS-async-%E4%B8%8E-wait-%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zhangweixi.github.io/2020/04/27/JS-async-%E4%B8%8E-wait-%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-04-27T17:30:26.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><p>你需要先了解Promise的使用方式</p><h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><p>async是一个函数修饰符，使得这个函数返回的是promise,如：</p><pre><code class="js">async function demo1(){    return &quot;message&quot;;}/*类似于*/function demo2(){    return new Promise(function(resolve,reject){        //success        resolve(&#39;message&#39;);    });}//返回类型console.log(typeof demo1()); //Promise { &#39;message&#39; }console.log(typeof demo2()); //object //调用demo1().then(function(msg){});</code></pre><p>看到上面的typeof demo1()了吧，返回的是一个promise,所以他自然是可以调用then方法的</p><p>那么问题来了，这里的then方法何时触发，因为这里的then其实就是promise中调用了resolve,可是async的resolve是何时触发的呢，那就是这个函数执行完毕，就会触发，这个触发的过程是隐形的，代码不可见的。</p><p>那么then()回调里的msg是从哪里来的呢，这是来自原demo1函数里的返回值</p><pre><code class="js">//==============无返回时的情况============async function demo2(){}demo2().then(msg=&gt;{console.log(msg);}); //打印结果：undefined//==============返回字符时的情况============async function demo3(){    return &quot;lalala&quot;;}demo3().then(msg=&gt;{console.log(msg)});    //打印结果：lalala//==============返回Promise时的情况============async function demo4(){    return new Promise(function(resolve,reject){    resolve(&#39;hahaha&#39;);    })}demo4().then(msg=&gt;{console.log(msg)}); //打印结果：hahaha//==============多个Promise时的情况============async function demo5(){    const p1 = new Promise(function(resolve,reject){    resolve(&#39;aaaaa&#39;);    });    const p2 = new Promise(function(resolve,reject){    resolve(&#39;bbbbb&#39;);    })        return p1;}demo5().then(msg =&gt; console.log(msg)); //打印结果：aaaaa//=========返回非promise但有then方法时的情况========async function demo6(){    return {    then(callback){            callback(&#39;cccc&#39;);    }    }}demo6().then(msg=&gt;console.log(msg));    //打印结果：cccc</code></pre><p>由上面的实验可以看出，如果async函数返回的是字符串，那么它将把字符串当做resolve的参数，如果返回是的一个promise，那么将用这个promise替换掉自己默认的promise，但是从最后一个实例看出来，返回的对象只要含有then方法，就可以覆盖async本身的then</p><h2 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h2><h3 id="await只能在async函数中使用"><a href="#await只能在async函数中使用" class="headerlink" title="await只能在async函数中使用"></a>await只能在async函数中使用</h3><p>wait就是要等，什么情况下需要等呢，同步需要等吗，不需要，因为同步本来就是顺序执行的，wait的目的就是要将异步变为同步,wait等待的对象需要时异步执行的对象，同时wait也需要在异步环境中才有效，即async函数中</p><pre><code class="js">//demo6().then(msg=&gt;console.log(msg));function demo7(){    await new Promise(function(resolve,reject){    setTimeout(() =&gt; {        resolve(&#39;1秒钟后执行&#39;);    }, 1000);    })}demo7(); //报错：SyntaxError: await is only valid in async functionasync function demo8(){    return await new Promise(function(resolve,reject){    setTimeout(() =&gt; {        resolve(&#39;1秒钟后执行&#39;);    }, 1000);    })}demo8();//打印结果：1秒钟后执行async function demo9(){    return await 5+5;}demo9().then(msg=&gt;console.log(msg));//打印结果：10</code></pre><p>由上可知，wait只能在async函数中运行，但是wait后面的等待是否是Promise并没有任何关系</p><h3 id="await返回的是异步执行后的结果，不再需要then"><a href="#await返回的是异步执行后的结果，不再需要then" class="headerlink" title="await返回的是异步执行后的结果，不再需要then"></a>await返回的是异步执行后的结果，不再需要then</h3><p>下面，来验证wait发生的作用是什么</p><pre><code class="js">async function asyncSay(msg,ms){    return new Promise(function(resolve,reject){        setTimeout(function(){            resolve(msg);        },ms);    });}async function demo10(){    const res = asyncSay(&#39;say1&#39;,1000);    console.log(res);     //Promise { &lt;pending&gt; }}async function demo10(){    const res = await asyncSay(&#39;say1&#39;,1000);    console.log(res);     //say1 }</code></pre><p>由上看出，当有await时，await作用的对象返回的是promise的resolve后的值，而没有的时候，则是promise本身，这就体现出来了，以前要获取异步的结果，需要调用then方法才行，现在就不需要了</p><h3 id="wait后的方法是同步执行的"><a href="#wait后的方法是同步执行的" class="headerlink" title="wait后的方法是同步执行的"></a>wait后的方法是同步执行的</h3><pre><code class="js">async function asyncSay(msg,ms){    return new Promise(function(resolve,reject){        setTimeout(function(){        console.log(ms,&#39;---&#39;,msg);            resolve(msg);        },ms);    });}async function demo11(){    asyncSay(&#39;msg1&#39;,2000);    asyncSay(&#39;msg2&#39;,1000);}demo11();/*打印结果1000 --- msg22000 --- msg1*/async function demo12(){    asyncSay(&#39;msg1&#39;,2000);    asyncSay(&#39;msg2&#39;,1000);}demo12();/*打印结果2000 --- msg11000 --- msg2*/</code></pre><p>由上面的实验可知，加了wait的函数将把异步任务变成同步来执行，谁在前谁就先执行</p><h3 id="另外一个奇怪的现象"><a href="#另外一个奇怪的现象" class="headerlink" title="另外一个奇怪的现象"></a>另外一个奇怪的现象</h3><pre><code class="js">async function demo13(){    new Promise((resolve,reject)=&gt;{        setTimeout(()=&gt;{console.log(2000);},2000);    });    new Promise((resoleve,reject)=&gt;{        setTimeout(()=&gt;{console.log(1000);},1000);    });}demo13();/*打印结果10002000*/async function demo14(){    await new Promise((resolve,reject)=&gt;{        setTimeout(()=&gt;{console.log(2000);},2000);    });    await new Promise((resoleve,reject)=&gt;{        setTimeout(()=&gt;{console.log(1000);},1000);    });}demo14();/*打印结果2000*/</code></pre><p>上面这个加了await,只执行了第一个Promise，为什么呢？？？？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;条件&quot;&gt;&lt;a href=&quot;#条件&quot; class=&quot;headerlink&quot; title=&quot;条件&quot;&gt;&lt;/a&gt;条件&lt;/h2&gt;&lt;p&gt;你需要先了解Promise的使用方式&lt;/p&gt;
+&lt;h2 id=&quot;async&quot;&gt;&lt;a href=&quot;#async&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://zhangweixi.github.io/categories/JS/"/>
+    
+    
+      <category term="JS" scheme="http://zhangweixi.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GIT配置ssh操作</title>
+    <link href="http://zhangweixi.github.io/2020/04/23/GIT%E9%85%8D%E7%BD%AEssh%E6%93%8D%E4%BD%9C/"/>
+    <id>http://zhangweixi.github.io/2020/04/23/GIT%E9%85%8D%E7%BD%AEssh%E6%93%8D%E4%BD%9C/</id>
+    <published>2020-04-23T13:34:38.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="生成及添加公钥"><a href="#生成及添加公钥" class="headerlink" title="生成及添加公钥"></a>生成及添加公钥</h4><p><a href="https://gitee.com/help/articles/4181#article-header0" target="_blank" rel="noopener">https://gitee.com/help/articles/4181#article-header0</a></p><h4 id="新项目Clone"><a href="#新项目Clone" class="headerlink" title="新项目Clone"></a>新项目Clone</h4><p>使用git上面的SSH方式，而不是https方式，<br><img src="/images/2020/04/23/6d686850-8523-11ea-ab9f-57ebd82557ba.png" alt="image.png"></p><h4 id="如果已经存在了项目，更新Git的操作方式为SSH"><a href="#如果已经存在了项目，更新Git的操作方式为SSH" class="headerlink" title="如果已经存在了项目，更新Git的操作方式为SSH"></a>如果已经存在了项目，更新Git的操作方式为SSH</h4><pre><code class="bash">git remote remove origin  #删除旧的更新方式git remote add origin git@github.com:Username/Your_Repo_Name.git #更新为正式的方式git branch --set-upstream-to=origin/master master #设置新的方式生效</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;生成及添加公钥&quot;&gt;&lt;a href=&quot;#生成及添加公钥&quot; class=&quot;headerlink&quot; title=&quot;生成及添加公钥&quot;&gt;&lt;/a&gt;生成及添加公钥&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://gitee.com/help/articles/4181#arti
+      
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://zhangweixi.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="工具" scheme="http://zhangweixi.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>egg框架练手笔记</title>
+    <link href="http://zhangweixi.github.io/2020/04/17/egg%E6%A1%86%E6%9E%B6%E7%BB%83%E6%89%8B%E7%AC%94%E8%AE%B0/"/>
+    <id>http://zhangweixi.github.io/2020/04/17/egg%E6%A1%86%E6%9E%B6%E7%BB%83%E6%89%8B%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-04-17T10:46:19.000Z</published>
+    <updated>2021-04-19T07:47:00.728Z</updated>
+    
+    <content type="html"><![CDATA[<p>试试</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;试试&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="JS" scheme="http://zhangweixi.github.io/categories/JS/"/>
+    
+    
+      <category term="JS" scheme="http://zhangweixi.github.io/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记element-ui checkbox无法选中</title>
+    <link href="http://zhangweixi.github.io/2020/04/09/%E8%AE%B0element-ui-checkbox%E6%97%A0%E6%B3%95%E9%80%89%E4%B8%AD/"/>
+    <id>http://zhangweixi.github.io/2020/04/09/%E8%AE%B0element-ui-checkbox%E6%97%A0%E6%B3%95%E9%80%89%E4%B8%AD/</id>
+    <published>2020-04-09T15:08:17.000Z</published>
+    <updated>2021-04-19T07:47:00.728Z</updated>
+    
+    <content type="html"><![CDATA[<p>element-ui在某些情况下无法选中，本文记录一些自己遇到的问题</p><pre><code class="html">&lt;el-form-item label=&#39;选项&#39;&gt;    &lt;el-checkbox-group v-model=&quot;form.type&quot;&gt;            &lt;el-checkbox v-for=&quot;(item,index) in types&quot; :key=&quot;index&quot; :label=&quot;item.name&quot;  :value=&quot;item.value&quot; name=&quot;type&quot;&gt;    &lt;/el-checkbox&gt;&lt;/el-checkbox-group&gt;&lt;/el-form-item&gt;&lt;script&gt;export default{  data(){    return {       types:[{name:&#39;往期&#39;,value:&#39;history&#39;},{name:&#39;VIP&#39;,value:&#39;vip&#39;},{name:&#39;推荐&#39;,value:&#39;recommend&#39;},{name:&#39;顶部&#39;,value:&#39;top&#39;}],            }  },  methods:{       async getCourse(){                const {data:{code,msg,book}} = await getCourse(this.id);        //可以                book.type = [];                this.form = book;        //错误        //this.form = book;                //this.form.type = [];            }  }}&lt;/script&gt;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      element-ui在某些情况下无法选中，本文记录一些自己遇到的问题
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Apache配置系列</title>
+    <link href="http://zhangweixi.github.io/2020/04/01/20200401Apache%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97/"/>
+    <id>http://zhangweixi.github.io/2020/04/01/20200401Apache%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97/</id>
+    <published>2020-04-01T18:07:18.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、配置反向代理"><a href="#一、配置反向代理" class="headerlink" title="一、配置反向代理"></a>一、配置反向代理</h1><p><img src="/images/2020/04/01/4ca93b90-7401-11ea-845e-a96e2c97e77f.png" alt="image.png"></p><ul><li>在有箭头的地方最好保留一个空格</li><li>course后面不要带/</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;一、配置反向代理&quot;&gt;&lt;a href=&quot;#一、配置反向代理&quot; class=&quot;headerlink&quot; title=&quot;一、配置反向代理&quot;&gt;&lt;/a&gt;一、配置反向代理&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/images/2020/04/01/4ca93b90-7401-11e
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://zhangweixi.github.io/categories/Linux/"/>
+    
+    
+      <category term="linux" scheme="http://zhangweixi.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP7.4安装时遇到的问题</title>
+    <link href="http://zhangweixi.github.io/2020/04/01/20200401PHP7-4%E5%AE%89%E8%A3%85%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://zhangweixi.github.io/2020/04/01/20200401PHP7-4%E5%AE%89%E8%A3%85%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-04-01T16:41:41.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-安装oniguruma"><a href="#1-安装oniguruma" class="headerlink" title="1.安装oniguruma"></a>1.安装oniguruma</h3><p><a href="https://www.24kplus.com/linux/1614.html" target="_blank" rel="noopener">看这里</a></p><h3 id="2-安装mbstring扩展"><a href="#2-安装mbstring扩展" class="headerlink" title="2.安装mbstring扩展"></a>2.安装mbstring扩展</h3><p>在configure时加上 –with-php-config</p><pre><code class="shell">phpize./configure --with-php-config=to/php/config/path(这里是自己的路径)</code></pre><h3 id="3-安装libiconv"><a href="#3-安装libiconv" class="headerlink" title="3.安装libiconv"></a>3.安装libiconv</h3><p><a href="https://blog.csdn.net/weixin_30349597/article/details/96166277" target="_blank" rel="noopener">看这里</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1-安装oniguruma&quot;&gt;&lt;a href=&quot;#1-安装oniguruma&quot; class=&quot;headerlink&quot; title=&quot;1.安装oniguruma&quot;&gt;&lt;/a&gt;1.安装oniguruma&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://www.24kpl
+      
+    
+    </summary>
+    
+    
+      <category term="PHP" scheme="http://zhangweixi.github.io/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="http://zhangweixi.github.io/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vmware安装vmware-tools</title>
+    <link href="http://zhangweixi.github.io/2020/03/29/2020-03-29vmware%E5%AE%89%E8%A3%85vmware-tools/"/>
+    <id>http://zhangweixi.github.io/2020/03/29/2020-03-29vmware%E5%AE%89%E8%A3%85vmware-tools/</id>
+    <published>2020-03-29T19:18:37.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<p>废话少说，直接开始</p><h3 id="1-找到包含vmware-tools的软件包"><a href="#1-找到包含vmware-tools的软件包" class="headerlink" title="1.找到包含vmware-tools的软件包"></a>1.找到包含vmware-tools的软件包</h3><p>很多教程一来就是如何如何安装，问题是现在没有这个软件呀，怎么安装？<br>打开vmware这个软件的安装目录，搜索该目录下有个叫linux.iso的文件，这家伙里面就包括了所需要的安装脚步<br><img src="/images/2020/03/29/0e062d10-71b0-11ea-9dbd-c1b3cb8786bf.png" alt="image.png"></p><h3 id="2-把这个包弄到虚拟机里面去"><a href="#2-把这个包弄到虚拟机里面去" class="headerlink" title="2.把这个包弄到虚拟机里面去"></a>2.把这个包弄到虚拟机里面去</h3><p>既然是iso文件，那就需要用虚拟光驱了<br><img src="/images/2020/03/29/cdcb0a80-71b0-11ea-9dbd-c1b3cb8786bf.png" alt="image.png"></p><h3 id="3-执行安装文件"><a href="#3-执行安装文件" class="headerlink" title="3.执行安装文件"></a>3.执行安装文件</h3><p>正式安装之前，强烈建议你批量安装这些工具，免得安装过程中缺少依赖不断报错</p><pre><code class="shell">yum -y install perl gcc gcc-c++ make cmake kernel kernel-headers kernel-devel net-tools</code></pre><h3 id="3-配置共享文件"><a href="#3-配置共享文件" class="headerlink" title="3.配置共享文件"></a>3.配置共享文件</h3><p>后面的看<a href="https://www.cnblogs.com/wendyw/p/9719872.html" target="_blank" rel="noopener">这里</a>吧</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;废话少说，直接开始&lt;/p&gt;
+&lt;h3 id=&quot;1-找到包含vmware-tools的软件包&quot;&gt;&lt;a href=&quot;#1-找到包含vmware-tools的软件包&quot; class=&quot;headerlink&quot; title=&quot;1.找到包含vmware-tools的软件包&quot;&gt;&lt;/a&gt;1.找
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://zhangweixi.github.io/categories/Linux/"/>
+    
+    
+      <category term="linux" scheme="http://zhangweixi.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>STM32HAL库串口中断函数分析</title>
+    <link href="http://zhangweixi.github.io/2020/03/24/2020-03-24STM32HAL%E5%BA%93%E4%B8%B2%E5%8F%A3%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90/"/>
+    <id>http://zhangweixi.github.io/2020/03/24/2020-03-24STM32HAL%E5%BA%93%E4%B8%B2%E5%8F%A3%E4%B8%AD%E6%96%AD%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90/</id>
+    <published>2020-03-24T23:40:59.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-第一步"><a href="#1-第一步" class="headerlink" title="1.第一步"></a>1.第一步</h3><ul><li>USART1_IRQHandler<br>如果开启了中断，当中断发生时，程序将会进入到这个函数中来，这个函数是一个若函数，已经在启动文件中有定义，如果开发者没有定义自己的回调，那么将会进入这个回调中</li></ul><h3 id="2-第二步"><a href="#2-第二步" class="headerlink" title="2.第二步"></a>2.第二步</h3><ul><li>HAL_UART_IRQHandler<br>从名字可以看出，这个函数是hal库函数，用户可在第一步中调用本函数，这个函数里处理了接受中断和发送中断的一些共同的操作，再本函数里，识别出是发送还是接收回调，然后调用相应的回调<h3 id="3-第三步"><a href="#3-第三步" class="headerlink" title="3.第三步"></a>3.第三步</h3></li><li>UART_Receive_IT<br>如果第二步识别出是接收回调，那么将会调用本函数，本函数会处理所有uart的接收中断公共事件，然后再调用具体的处理用户逻辑的函数<h3 id="4-第四部"><a href="#4-第四部" class="headerlink" title="4.第四部"></a>4.第四部</h3></li><li>HAL_UART_RxCpltCallback<br>用户的逻辑函数是一个若函数，如果用户不定义的话，将会进入初始化的函数中</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1-第一步&quot;&gt;&lt;a href=&quot;#1-第一步&quot; class=&quot;headerlink&quot; title=&quot;1.第一步&quot;&gt;&lt;/a&gt;1.第一步&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;USART1_IRQHandler&lt;br&gt;如果开启了中断，当中断发生时，程序将会进入到这个函数中来，这个
+      
+    
+    </summary>
+    
+    
+      <category term="嵌入式" scheme="http://zhangweixi.github.io/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    
+      <category term="STM32" scheme="http://zhangweixi.github.io/tags/STM32/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>指针一定比变量快吗</title>
+    <link href="http://zhangweixi.github.io/2020/03/23/2020-30-23C%E6%8C%87%E9%92%88%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%80%E5%AE%9A%E6%AF%94%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F%E5%BF%AB/"/>
+    <id>http://zhangweixi.github.io/2020/03/23/2020-30-23C%E6%8C%87%E9%92%88%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%80%E5%AE%9A%E6%AF%94%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F%E5%BF%AB/</id>
+    <published>2020-03-23T18:23:18.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<p>不一定</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;不一定&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="C" scheme="http://zhangweixi.github.io/categories/C/"/>
+    
+    
+      <category term="C" scheme="http://zhangweixi.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于C的疑惑</title>
+    <link href="http://zhangweixi.github.io/2020/03/23/2020-03-23-%E5%85%B3%E4%BA%8EC%E7%9A%84%E7%96%91%E6%83%91/"/>
+    <id>http://zhangweixi.github.io/2020/03/23/2020-03-23-%E5%85%B3%E4%BA%8EC%E7%9A%84%E7%96%91%E6%83%91/</id>
+    <published>2020-03-23T18:10:11.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-为什么字符串无法直接赋值给字符数组"><a href="#1-为什么字符串无法直接赋值给字符数组" class="headerlink" title="1.为什么字符串无法直接赋值给字符数组"></a>1.为什么字符串无法直接赋值给字符数组</h3><p>为什么上面错误，下面正确，这是因为当把字符串赋值给某个变量时，其实是把字符串的首地址给那个变量，既然是地址，那肯定只能给指针变量了，char names[] 是一个字符数组，char *names[]是字符型的指针数组</p><pre><code class="c">char names[] = {                   &quot;Zara Ali&quot;,                   &quot;Hina Ali&quot;,                   &quot;Nuha Ali&quot;,                   &quot;Sara Ali&quot;,   };char *names[] = {                   &quot;Zara Ali&quot;,                   &quot;Hina Ali&quot;,                   &quot;Nuha Ali&quot;,                   &quot;Sara Ali&quot;,   };</code></pre><p>同样类似的还有下面这样的情况</p><pre><code class="c">typedef struct {    char name[];    int price;}Book;Book book1;book1.price = 20;book1.name = &quot;english&quot;;//上面的将会编译出错，原因同上，正确的方式应该是strcpy(book1.name,&quot;english&quot;);</code></pre><h3 id="2-类型决定了变量存储的布局"><a href="#2-类型决定了变量存储的布局" class="headerlink" title="2.类型决定了变量存储的布局"></a>2.类型决定了变量存储的布局</h3><p>我们知道类型会影响变量占用空间的大小，如int占用4个字节，char占用一个字节，可是，类型是如何决定布局的呢，布局指的是什么？又有哪些不同的布局方式？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1-为什么字符串无法直接赋值给字符数组&quot;&gt;&lt;a href=&quot;#1-为什么字符串无法直接赋值给字符数组&quot; class=&quot;headerlink&quot; title=&quot;1.为什么字符串无法直接赋值给字符数组&quot;&gt;&lt;/a&gt;1.为什么字符串无法直接赋值给字符数组&lt;/h3&gt;&lt;p&gt;为什
+      
+    
+    </summary>
+    
+    
+      <category term="C" scheme="http://zhangweixi.github.io/categories/C/"/>
+    
+    
+      <category term="C" scheme="http://zhangweixi.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>STM32中断</title>
+    <link href="http://zhangweixi.github.io/2020/03/13/2020-03-13STM32%E4%B8%AD%E6%96%AD/"/>
+    <id>http://zhangweixi.github.io/2020/03/13/2020-03-13STM32%E4%B8%AD%E6%96%AD/</id>
+    <published>2020-03-13T22:48:41.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-外部中断与GPIO关系"><a href="#1-外部中断与GPIO关系" class="headerlink" title="1.外部中断与GPIO关系"></a>1.外部中断与GPIO关系</h3><p>stm32有22个外部中断，这里的外部，并不仅仅是指外部GPIO产生的才叫外部中断，EXTIO-EXTI15是链接到外部的GPIO的，所以，对于每一个EXTI来说，GPIO是需要配置的，而不是固定好了的。<br><img src="/images/2020/03/13/4aab24a0-653a-11ea-ba84-1f4f19191e66.png" alt="image.png"></p><p>外部GPIO触发只有上升沿触发和下降沿触发，可以选择其一，或者两者都选择，但是没有低电平触发</p><h3 id="2-串口波特率计算方式"><a href="#2-串口波特率计算方式" class="headerlink" title="2.串口波特率计算方式"></a>2.串口波特率计算方式</h3><p><img src="/images/2020/03/14/10da1ae0-65fa-11ea-ba84-1f4f19191e66.png" alt="image.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1-外部中断与GPIO关系&quot;&gt;&lt;a href=&quot;#1-外部中断与GPIO关系&quot; class=&quot;headerlink&quot; title=&quot;1.外部中断与GPIO关系&quot;&gt;&lt;/a&gt;1.外部中断与GPIO关系&lt;/h3&gt;&lt;p&gt;stm32有22个外部中断，这里的外部，并不仅仅是指
+      
+    
+    </summary>
+    
+    
+      <category term="嵌入式" scheme="http://zhangweixi.github.io/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    
+      <category term="STM32" scheme="http://zhangweixi.github.io/tags/STM32/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>STM32学习过程问题收集</title>
+    <link href="http://zhangweixi.github.io/2020/03/06/STM32%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E6%94%B6%E9%9B%86/"/>
+    <id>http://zhangweixi.github.io/2020/03/06/STM32%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E6%94%B6%E9%9B%86/</id>
+    <published>2020-03-06T10:41:08.000Z</published>
+    <updated>2021-04-19T07:47:00.728Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.J-LINK原本是要收费的，而且费用不菲，因而出现很多盗版，高版本的J-LINK驱动做了盗版检测，低版本的没有检测这个功能</p><p><img src="http://www.openedv.com/data/attachment/forum/2013/3/20/dc5168635b6062450b8c7c49dc802049_358.jpg" alt="j-link盗版问题"><br>解决办法，安装一个低版本的驱动就行，<a href="http://www.openedv.com/thread-13225-1-1.html" target="_blank" rel="noopener">看这里</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.J-LINK原本是要收费的，而且费用不菲，因而出现很多盗版，高版本的J-LINK驱动做了盗版检测，低版本的没有检测这个功能&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.openedv.com/data/attachment/forum/2013/3/20/d
+      
+    
+    </summary>
+    
+    
+      <category term="嵌入式" scheme="http://zhangweixi.github.io/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    
+      <category term="STM32" scheme="http://zhangweixi.github.io/tags/STM32/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MDK安装设备扩展包</title>
+    <link href="http://zhangweixi.github.io/2020/03/05/2020-03-05MDK%E5%AE%89%E8%A3%85%E8%AE%BE%E5%A4%87%E6%89%A9%E5%B1%95%E5%8C%85/"/>
+    <id>http://zhangweixi.github.io/2020/03/05/2020-03-05MDK%E5%AE%89%E8%A3%85%E8%AE%BE%E5%A4%87%E6%89%A9%E5%B1%95%E5%8C%85/</id>
+    <published>2020-03-05T21:12:40.000Z</published>
+    <updated>2021-04-19T07:47:00.724Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>最简单的方式就是使用MDK自带的扩展包管理工具安装：<br><img src="/images/2020/03/05/45bc46f0-5ee5-11ea-be08-f5cc4aff3319.BMP" alt="gujian.BMP"></p></li><li><p>打开 <a href="https://www.keil.com/dd2" target="_blank" rel="noopener">https://www.keil.com/dd2</a> 找到要下载的内容下载，下载后不用解压，打开方法一的界面，选择File-&gt;Import</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;最简单的方式就是使用MDK自带的扩展包管理工具安装：&lt;br&gt;&lt;img src=&quot;/images/2020/03/05/45bc46f0-5ee5-11ea-be08-f5cc4aff3319.BMP&quot; alt=&quot;gujian.BMP&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="嵌入式" scheme="http://zhangweixi.github.io/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    
+      <category term="STM32" scheme="http://zhangweixi.github.io/tags/STM32/"/>
+    
+  </entry>
+  
+</feed>
